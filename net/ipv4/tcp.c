@@ -2631,7 +2631,7 @@ void tcp_get_info(struct sock *sk, struct tcp_info *info)
 {
 	const struct tcp_sock *tp = tcp_sk(sk); /* iff sk_type == SOCK_STREAM */
 	const struct inet_connection_sock *icsk = inet_csk(sk);
-	u32 now = tcp_time_stamp;
+	u32 now = tcp_time_stamp, intv;
 	unsigned int start;
 	int notsent_bytes;
 	u64 rate64;
@@ -2719,6 +2719,15 @@ void tcp_get_info(struct sock *sk, struct tcp_info *info)
 	info->tcpi_notsent_bytes = max(0, notsent_bytes);
 
 	info->tcpi_min_rtt = tcp_min_rtt(tp);
+
+	info->tcpi_delivery_rate_app_limited = tp->rate_app_limited ? 1 : 0;
+	rate = READ_ONCE(tp->rate_delivered);
+	intv = READ_ONCE(tp->rate_interval_us);
+	if (rate && intv) {
+		rate64 = (u64)rate * tp->mss_cache * USEC_PER_SEC;
+		do_div(rate64, intv);
+		put_unaligned(rate64, &info->tcpi_delivery_rate);
+	}
 }
 EXPORT_SYMBOL_GPL(tcp_get_info);
 
