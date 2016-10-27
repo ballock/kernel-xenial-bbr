@@ -1,4 +1,4 @@
-linux-lts-xenial (4.4.0+bbr-45.66~7.1) wheezy; urgency=medium
+linux (4.4.0.bbr-45.66~7.2) wheezy; urgency=medium
 
   * Trusty kernel from Xenial backports (4.4.0) + a couple of patches + BBR
 
