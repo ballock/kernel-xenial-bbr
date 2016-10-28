@@ -80,8 +80,8 @@ Description: Linux kernel version specific cloud tools for version PKGVER-ABINUM
  =HUMAN=.
  You probably want to install linux-cloud-tools-PKGVER-ABINUM-<flavour>.
 
-Package: linux-image-ARCH
-Architecture: ARCH
+Package: linux-image-amd64
+Architecture: amd64
 Section: kernel
 Priority: optional
 Depends: ${misc:Depends}, linux-image-PKGVER-ABINUM-generic, linux-image-extra-PKGVER-ABINUM-generic
@@ -90,8 +90,8 @@ Description: Linux for 64-bit PCs (meta-package)
  This package depends on the latest TCP BBR Linux kernel and modules for use
  on PCs with AMD64, Intel 64 or VIA Nano processors.
 
-Package: linux-headers-ARCH
-Architecture: ARCH
+Package: linux-headers-amd64
+Architecture: amd64
 Section: kernel
 Priority: optional
 Depends: ${misc:Depends}, linux-headers-PKGVER-ABINUM-generic
