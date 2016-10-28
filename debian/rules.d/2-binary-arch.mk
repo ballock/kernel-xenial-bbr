@@ -449,15 +449,15 @@ endif
 
 binary-%: pkgimg = $(bin_pkg_name)-$*
 binary-%: pkgimg_ex = $(extra_pkg_name)-$*
-binary-%: pkgimg_debmeta = $(bin_pkg_metaname)-$*
+binary-%: pkgimg_debmeta = $(bin_pkg_metaname)
 binary-%: pkghdr = $(hdrs_pkg_name)-$*
-binary-%: pkghdr_debmeta = $(hdrs_pkg_metaname)-$*
+binary-%: pkghdr_debmeta = $(hdrs_pkg_metaname)
 binary-%: dbgpkg = $(bin_pkg_name)-$*-dbgsym
 binary-%: dbgpkgdir = $(CURDIR)/debian/$(bin_pkg_name)-$*-dbgsym
 binary-%: pkgtools = $(tools_flavour_pkg_name)-$*
-binary-%: pkgtools_debmeta = $(tools_pkg_metaname)-$*
+binary-%: pkgtools_debmeta = $(tools_pkg_metaname)
 binary-%: pkgcloud = $(cloud_flavour_pkg_name)-$*
-binary-%: pkgcloud_debmeta = $(cloud_pkg_metaname)-$*
+binary-%: pkgcloud_debmeta = $(cloud_pkg_metaname)
 binary-%: rprovides = $(if $(filter true,$(call custom_override,do_zfs,$*)),$(comma) spl-dkms$(comma) zfs-dkms)
 binary-%: target_flavour = $*
 binary-%: install-%
