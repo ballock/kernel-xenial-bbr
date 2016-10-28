@@ -80,3 +80,42 @@ Description: Linux kernel version specific cloud tools for version PKGVER-ABINUM
  =HUMAN=.
  You probably want to install linux-cloud-tools-PKGVER-ABINUM-<flavour>.
 
+Package: linux-image-amd64
+Architecture: amd64
+Section: kernel
+Priority: optional
+Depends: ${misc:Depends}, linux-image-PKGVER-ABINUM-generic, linux-image-extra-PKGVER-ABINUM-generic
+Recommends: firmware-linux-free (>= 3~), irqbalance
+Description: Linux for 64-bit PCs (meta-package)
+ This package depends on the latest TCP BBR Linux kernel and modules for use
+ on PCs with AMD64, Intel 64 or VIA Nano processors.
+
+Package: linux-headers-amd64
+Architecture: amd64
+Section: kernel
+Priority: optional
+Depends: ${misc:Depends}, linux-headers-PKGVER-ABINUM-generic
+Description: Header files for Linux amd64 configuration (meta-package)
+ This package depends on the architecture-specific header files for the
+ latest TCP BBR Linux kernel amd64 configuration.
+
+Package: linux-tools
+Architecture: amd64
+Section: kernel
+Priority: optional
+Provides: linux-tools
+Depends: ${misc:Depends}, linux-tools-PKGVER-ABINUM-generic
+Description: Generic Linux kernel tools
+ This package will always depend on the latest generic kernel tools
+ available.
+
+Package: linux-cloud-tools
+Architecture: ARCH
+Section: kernel
+Priority: optional
+Provides: linux-cloud-tools
+Depends: ${misc:Depends}, linux-cloud-tools-PKGVER-ABINUM-generic
+Description: Generic Linux kernel cloud tools
+ This package will always depend on the latest generic kernel cloud tools
+ available.
+
