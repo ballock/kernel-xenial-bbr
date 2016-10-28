@@ -449,11 +449,15 @@ endif
 
 binary-%: pkgimg = $(bin_pkg_name)-$*
 binary-%: pkgimg_ex = $(extra_pkg_name)-$*
+binary-%: pkgimg_debmeta = $(bin_pkg_metaname)-$*
 binary-%: pkghdr = $(hdrs_pkg_name)-$*
+binary-%: pkghdr_debmeta = $(hdrs_pkg_metaname)-$*
 binary-%: dbgpkg = $(bin_pkg_name)-$*-dbgsym
 binary-%: dbgpkgdir = $(CURDIR)/debian/$(bin_pkg_name)-$*-dbgsym
 binary-%: pkgtools = $(tools_flavour_pkg_name)-$*
+binary-%: pkgtools_debmeta = $(tools_pkg_metaname)-$*
 binary-%: pkgcloud = $(cloud_flavour_pkg_name)-$*
+binary-%: pkgcloud_debmeta = $(cloud_pkg_metaname)-$*
 binary-%: rprovides = $(if $(filter true,$(call custom_override,do_zfs,$*)),$(comma) spl-dkms$(comma) zfs-dkms)
 binary-%: target_flavour = $*
 binary-%: install-%
@@ -485,6 +489,16 @@ ifeq ($(do_extras_package),true)
 	fi
 endif
 
+	dh_installchangelogs -p$(pkgimg_debmeta)
+	dh_installdocs -p$(pkgimg_debmeta)
+	dh_compress -p$(pkgimg_debmeta)
+	dh_fixperms -p$(pkgimg_debmeta)
+	dh_installdeb -p$(pkgimg_debmeta)
+	dh_shlibdeps -p$(pkgimg_debmeta) $(shlibdeps_opts)
+	$(lockme) dh_gencontrol -p$(pkgimg_debmeta)
+	dh_md5sums -p$(pkgimg_debmeta)
+	dh_builddeb -p$(pkgimg_debmeta)
+
 	dh_installchangelogs -p$(pkghdr)
 	dh_installdocs -p$(pkghdr)
 	dh_compress -p$(pkghdr)
@@ -494,6 +508,16 @@ endif
 	$(lockme) dh_gencontrol -p$(pkghdr)
 	dh_md5sums -p$(pkghdr)
 	dh_builddeb -p$(pkghdr)
+
+	dh_installchangelogs -p$(pkghdr_debmeta)
+	dh_installdocs -p$(pkghdr_debmeta)
+	dh_compress -p$(pkghdr_debmeta)
+	dh_fixperms -p$(pkghdr_debmeta)
+	dh_installdeb -p$(pkghdr_debmeta)
+	dh_shlibdeps -p$(pkghdr_debmeta) $(shlibdeps_opts)
+	$(lockme) dh_gencontrol -p$(pkghdr_debmeta)
+	dh_md5sums -p$(pkghdr_debmeta)
+	dh_builddeb -p$(pkghdr_debmeta)
 
 ifneq ($(skipsub),true)
 	@set -e; for sub in $($(*)_sub); do		\
@@ -552,6 +576,16 @@ ifeq ($(do_linux_tools),true)
 	$(lockme) dh_gencontrol -p$(pkgtools)
 	dh_md5sums -p$(pkgtools)
 	dh_builddeb -p$(pkgtools)
+
+	dh_installchangelogs -p$(pkgtools_debmeta)
+	dh_installdocs -p$(pkgtools_debmeta)
+	dh_compress -p$(pkgtools_debmeta)
+	dh_fixperms -p$(pkgtools_debmeta)
+	dh_installdeb -p$(pkgtools_debmeta)
+	dh_shlibdeps -p$(pkgtools_debmeta) $(shlibdeps_opts)
+	$(lockme) dh_gencontrol -p$(pkgtools_debmeta)
+	dh_md5sums -p$(pkgtools_debmeta)
+	dh_builddeb -p$(pkgtools_debmeta)
 endif
 ifeq ($(do_cloud_tools),true)
 	dh_installchangelogs -p$(pkgcloud)
@@ -563,6 +597,16 @@ ifeq ($(do_cloud_tools),true)
 	$(lockme) dh_gencontrol -p$(pkgcloud)
 	dh_md5sums -p$(pkgcloud)
 	dh_builddeb -p$(pkgcloud)
+
+	dh_installchangelogs -p$(pkgcloud_debmeta)
+	dh_installdocs -p$(pkgcloud_debmeta)
+	dh_compress -p$(pkgcloud_debmeta)
+	dh_fixperms -p$(pkgcloud_debmeta)
+	dh_installdeb -p$(pkgcloud_debmeta)
+	dh_shlibdeps -p$(pkgcloud_debmeta) $(shlibdeps_opts)
+	$(lockme) dh_gencontrol -p$(pkgcloud_debmeta)
+	dh_md5sums -p$(pkgcloud_debmeta)
+	dh_builddeb -p$(pkgcloud_debmeta)
 endif
 
 ifneq ($(full_build),false)
