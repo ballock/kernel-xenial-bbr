@@ -8,7 +8,7 @@ src_pkg_name=$(shell sed -n '1s/^\(.*\) (.*).*$$/\1/p' $(DEBIAN)/changelog)
 
 # Get some version info
 release := $(shell sed -n '1s/^$(src_pkg_name).*(\([0-9]*\.[0-9]*\.[0-9]*\).*).*$$/\1/p' $(DEBIAN)/changelog)
-revisions := $(shell sed -n 's/^$(src_pkg_name)\ .*($(release)-\(.*\)).*$$/\1/p' $(DEBIAN)/changelog | tac)
+revisions := $(shell sed -n 's/^$(src_pkg_name)\ .*($(release).*-\(.*\)).*$$/\1/p' $(DEBIAN)/changelog | tac)
 revision ?= $(word $(words $(revisions)),$(revisions))
 prev_revisions := $(filter-out $(revision),0.0 $(revisions))
 prev_revision := $(word $(words $(prev_revisions)),$(prev_revisions))
